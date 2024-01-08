@@ -54,10 +54,12 @@ createApp({
             ],
 
         activeIndex: 0,
+        isAutoplayOn: true,
+        autoplayInterval: null,
 
         }
     },
-    
+
     methods: {
 
         nextSlide() {
@@ -68,8 +70,19 @@ createApp({
         },
         setActiveIndex(index) {
             this.activeIndex = index;
-        }
+        },
+        startAutoplay() {
+            this.autoplayInterval = setInterval(this.nextSlide, 3000);
+            this.isAutoplayOn = true;
+          },
+          stopAutoplay() {
+            clearInterval(this.autoplayInterval);
+            this.isAutoplayOn = false;
+          },
       },
+      mounted() {
+        this.startAutoplay();
+      }
 }
 
 ).mount('#app');
